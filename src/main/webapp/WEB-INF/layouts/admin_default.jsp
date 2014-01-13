@@ -9,6 +9,8 @@
 		<link href="resources/css/bootstrap.min.css" rel="stylesheet" >
 		<script src="resources/js/bootstrap.js"></script>
 		<link href="resources/css/font-awesome.min.css" rel="stylesheet" >
+
+		<script src="resources/js/json2.js"></script>
 	
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=8" />
