@@ -6,9 +6,9 @@
                	<ul class="nav">
                    	<li><a href="#">Главная</a></li>
                     <li><a href="download">Анкета</a></li>
-   	                <li><a href="#">Новости</a></li>
+   	                <li><a href="#">Лента Новостей</a></li>
        	            <li><a href="#">О компании</a></li>
-               	    <li><a href="#">Контакты</a></li>
+               	    <li><a href="#">Контакты</a></li>
               	</ul>
    	    	</div>
 		</div>

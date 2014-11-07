@@ -11,10 +11,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "news2")
-@Table
+@Entity
+@Table(name = "NEWS")
 public class News implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -41,7 +43,7 @@ public class News implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name="incomingDate", columnDefinition="TIMESTAMP DEFAULT", nullable=false)
+	@Column(name="incomingDate", columnDefinition="TIMESTAMP DEFAULT", nullable=true)
 	public Date getIncomingDate() {
 		return incomingDate;
 	}
@@ -50,7 +52,7 @@ public class News implements Serializable {
 		this.incomingDate = incomingDate;
 	}
 
-	@Column(name="changeDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", nullable=false)
+	@Column(name="changeDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", nullable=true)
 	public Date getChangeDate() {
 		return changeDate;
 	}
@@ -95,8 +97,15 @@ public class News implements Serializable {
 		this.messageOrder = messageOrder;
 	}
  
-	/*public Stock(String stockCode, String stockName) {
-		this.stockCode = stockCode;
-		this.stockName = stockName;
-	}*/
+	 public String toString() {
+		 return new ToStringBuilder( this )
+	     	.append( "Id",            id )
+	        .append( "incomingDate",  incomingDate )
+	        .append( "changeDate",    changeDate )
+	        .append( "title",         title )
+	        .append( "message",       message )
+	        .append( "messageStatus", messageStatus )
+	        .append( "messageOrder",  messageOrder )
+	        .toString();
+	 }
 }

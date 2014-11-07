@@ -1,0 +1,62 @@
+/*
+input#messageTitle {
+	width: 100%;
+}*/
+/*
+.news_table table {
+	border-collapse:collapse;
+}
+
+table, td, th {
+	border:1px solid black;
+}
+*/
+
+/* Модальные окна */
+
+/* Задаем ширину модального окна*/
+body .modal-add_news {
+    /* new custom width */
+    width: 750px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -375px;
+}
+
+/* Скрываем div */
+body .modal-add_news .notShow {
+	display: none;
+}
+
+/* Устанавливаем ширину для поля Title*/
+body .modal-add_news #messageTitle {
+	width: 705px;
+}
+
+/* Делаем активную радио-кнопку красной */
+div .btn-group .active {
+	background-color: red;
+}
+
+/* Расстояние между радио-кнопками и висивиком */
+#messageStatus {
+	margin-bottom: 10px;
+}
+
+/* Размеры висивик и его сдвиг влево */
+body .modal-add_news p.container {
+	width: 720px; 
+	margin-left: -15px;
+}
+
+/* Положение кнопки delete на модальном окне */
+#deleteNews {
+	margin-right: 50%;
+}
+
+/* Размеры input, появляющегося при смене messageOrder */
+td input.newValueMessageOrder {
+	height:18px;
+	width:50px;
+	margin:0;
+	padding:0;
+}
