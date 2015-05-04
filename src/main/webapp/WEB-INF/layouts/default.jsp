@@ -6,8 +6,8 @@
 <html>  
 		
 	<head>
-		<script src="resources/js/jquery-2.0.3.js"></script>
-		<script src="resources/js/bootstrap.js"></script>
+		<script src='<c:url value="/resources/js/jquery-2.0.3.js" />' ></script>
+		<script src='<c:url value="/resources/js/bootstrap.js" />' ></script>
 	
     	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=8" />
@@ -15,8 +15,8 @@
 		<tiles:insertAttribute name="title" ignore="true" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
-		<link href="resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link href="resources/css/virgo.css" rel="stylesheet" media="screen">
+		<link href='<c:url value="/resources/css/bootstrap.min.css" />' rel="stylesheet" media="screen">
+		<link href='<c:url value="/resources/css/virgo.css" />' rel="stylesheet" media="screen">
 
 	</head>
 	

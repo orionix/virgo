@@ -31,7 +31,7 @@ public class NewsBusinessObjectImpl implements NewsBusinessObject {
 		this.newsDao = newsDao;
 	}*/
 	
-	private Log log = LogFactory.getLog(NewsBusinessObjectImpl.class);
+	private Log log = LogFactory.getLog( NewsBusinessObjectImpl.class );
 	
 	private static final String SELECT_ALL_QUERY 		= "select n from News n";
 	private static final String GET_MAX_ORDER	 		= "select max(n.messageOrder) from News n";
@@ -50,16 +50,15 @@ public class NewsBusinessObjectImpl implements NewsBusinessObject {
 
 	@Override
 	public void save( News news ) {
-		if ( news.getId() == null ) { // вставить новость 
+		if ( news.getId() == null ) { 			// Saving news 
 			log.info( "Inserting new news" );
-			log.info( "em: " + em );
-			log.info( "news inside NBO " + news );
+			log.info( "news inside NewsBusinessObject " + news );
 			
 			em.persist( news );
 			em.flush();
 			//em.clear();
 			
-		} else { // обновить новость			 
+		} else { 								// Updating news
 			log.info( "Updating existing news" ); 
 			log.info( "News saved with id: " + news.getId() );
 			em.merge( news );
@@ -101,13 +100,13 @@ public class NewsBusinessObjectImpl implements NewsBusinessObject {
 		Query query = em.createQuery( GET_MAX_ORDER );
 		Object maxOrder = query.getSingleResult();
 		 
-		return maxOrder == null ? 0 : (Integer) maxOrder;
+		return maxOrder == null ? 0 : ( Integer ) maxOrder;
 	}
 
 	@Override
 	public void updateOrder( News news, Integer messageOrder ) {
-		log.info( "Updating messageOrder:" + messageOrder + " of the news: " + news);
-		news.setMessageOrder(messageOrder);
+		log.info( "Updating messageOrder:" + messageOrder + " of the news: " + news );
+		news.setMessageOrder( messageOrder );
 		em.merge( news );
 		em.flush();
 	}

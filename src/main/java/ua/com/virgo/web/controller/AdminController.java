@@ -23,16 +23,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ua.com.virgo.bo.NewsBusinessObject;
+import ua.com.virgo.bo.UsersBusinessObject;
 import ua.com.virgo.model.News;
+import ua.com.virgo.model.Users;
 
 @Controller
-@RequestMapping(value = {"/admin"})
+@RequestMapping(value = {"/admin", "/admin/"})
 public class AdminController {
 	
 	final Logger logger = LoggerFactory.getLogger( AdminController.class );
 	
 	@Autowired
 	private NewsBusinessObject nbo;
+	
+	@Autowired
+	private UsersBusinessObject ubo;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String admin( Locale locale, Model model ) {
@@ -66,6 +71,8 @@ public class AdminController {
 		*/
 		model.addAttribute( "news", newsList );
 		
+		// If we are going to populate and display jsp page we return name of view, 
+		// other words name of jsp (without .jsp) - here we call admin.jsp
 		return "admin";
 	}
 	
@@ -98,32 +105,60 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = {"/delete/{id}"}, method = RequestMethod.GET) 
-	public @ResponseBody String update( @PathVariable ("id") Integer id, Model model) {
-		logger.info("Deleting news, id: " + id);
+	public @ResponseBody String update( @PathVariable ("id") Integer id, Model model ) {
+		logger.info( "Deleting news, id: " + id );
 		
-		News news = nbo.findByNewsId(id);
-		nbo.delete(news);
+		News news = nbo.findByNewsId( id );
+		nbo.delete( news );
 		
 		return "redirect:/admin";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET) 
-	public @ResponseBody News updateForm(@PathVariable ("id") Integer id, Model model) {	
+	public @ResponseBody News updateForm( @PathVariable ("id") Integer id, Model model ) {	
 		logger.info( "Updating news, id: " + id );		
 		
-		News news = nbo.findByNewsId(id);
+		News news = nbo.findByNewsId( id );
 		logger.info( "NEWS: " + news.toString() );		
 	
 		return news;
 	}
 	
 	@RequestMapping(value = "/updateMessageOrder/{id}", method = RequestMethod.GET) 
-	public @ResponseBody News updateMessageOrder(@PathVariable ("id") Integer id, @RequestParam(value = "messageOrder", required = false) Integer messageOrder, Model model) {	
+	public @ResponseBody News updateMessageOrder( @PathVariable ("id") Integer id, @RequestParam(value = "messageOrder", required = false) Integer messageOrder, Model model ) {	
 		logger.info( "Inside updateMessageOrder" );	
 		
-		News news = nbo.findByNewsId(id);
-		nbo.updateOrder(news, messageOrder);				
+		News news = nbo.findByNewsId( id );
+		nbo.updateOrder( news, messageOrder );				
 	
 		return news;
 	}
+	
+	@RequestMapping(value = {"/users"}, method = RequestMethod.GET)
+	public String usersList( Locale locale, Model model ) {
+		
+		logger.info( "Inside usersList method" );
+		
+		List<Users> usersList;		
+		usersList = ubo.selectAll();		
+		model.addAttribute( "users", usersList );
+		
+		// If we are going to populate and display jsp page we return name of view, 
+		// other words name of jsp (without .jsp) - here we call userlist.jsp
+		return "userslist";
+	}
 }
+
+/*
+@Controller
+@RequestMapping(value = {"/admin/users"})
+public class AdminUsersController {
+	
+	final Logger logger = LoggerFactory.getLogger( AdminUsersController.class );
+	
+	@Autowired
+	private UsersBusinessObject ubo;
+	
+	
+}
+*/

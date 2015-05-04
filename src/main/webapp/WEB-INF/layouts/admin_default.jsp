@@ -7,27 +7,26 @@
 		
 	<head>
 		<!-- JQuery -->
-		<script src="resources/js/jquery-2.0.3.js"></script>
+		<script src='<c:url value="/resources/js/jquery-2.0.3.js" />' ></script>
+		
 		<!-- JQuery -->
 		
 		<!-- Color animation jQuery-plugin -->
-		<script src="resources/js/jquery.animate-colors-min.js"></script>
+		<script src='<c:url value="/resources/js/jquery.animate-colors-min.js" />' ></script>
 		<!-- Color animation jQuery-plugin -->
 		
 		<!-- Bootstrap -->
-		<link href="resources/css/bootstrap.min.css" rel="stylesheet" >		
-		<script src="resources/js/bootstrap.js"></script>
-		<link href="resources/css/font-awesome.min.css" rel="stylesheet" >
+		<link href='<c:url value="/resources/css/bootstrap.min.css" />' rel="stylesheet" >		
+		<script src='<c:url value="/resources/js/bootstrap.js" />' ></script>
+		<link href='<c:url value="/resources/css/font-awesome.min.css" />' rel="stylesheet" >
 		<!-- Bootstrap -->
 		
-		<!-- TableSort -->
-		<link href="resources/css/tablesort/blue/style.css" rel="stylesheet" >					
-		<script src="resources/js/jquery.tablesorter.js"></script>
-		<link href="resources/css/tablesort/pager/pager.css" rel="stylesheet" >
-		<script src="resources/js/jquery.tablesorter.pager.js"></script>
-		<!-- TableSort -->	
+		<!-- DataTables -->
+		<link href='<c:url value="/resources/css/jquery.dataTables.min.css" />' rel="stylesheet" >
+		<script src='<c:url value="/resources/js/jquery.dataTables.min.js" />' ></script>
+		<!-- DataTables -->
 
-		<script src="resources/js/json2.js"></script>
+		<script src='<c:url value="/resources/js/json2.js" />' ></script>
 	
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=8" />
@@ -36,23 +35,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">		
 
 		<!-- CodeMirror -->
-		<link href="resources/codemirror/css/codemirror.css" rel="stylesheet">		
-		<script src="resources/codemirror/js/codemirror.js"></script>
-		<script src="resources/codemirror/js/xml.js"></script>
-		<script src="resources/codemirror/js/formatting.min.js"></script>
+		<link href='<c:url value="/resources/codemirror/css/codemirror.css" />' rel="stylesheet">		
+		<script src='<c:url value="/resources/codemirror/js/codemirror.js" />' ></script>
+		<script src='<c:url value="/resources/codemirror/js/xml.js" />' ></script>
+		<script src='<c:url value="/resources/codemirror/js/formatting.min.js" />' ></script>
 		<!-- CodeMirror -->
 
 		<!-- SummerNote -->
-		<link href="resources/css/summernote.css" rel="stylesheet" media="screen">
-		<script src="resources/js/summernote.js"></script>
+		<link href='<c:url value="/resources/css/summernote.css" />' rel="stylesheet" media="screen">
+		<script src='<c:url value="/resources/js/summernote.js" />' ></script>
 		<!-- SummerNote -->
 		
 		<!-- jEditable -->
-		<script src="resources/js/jquery.jeditable.js"></script>			
+		<script src='<c:url value="/resources/js/jquery.jeditable.js" />' ></script>			
 		<!-- jEditable -->
 
 		<!-- Custom CSS & JS -->
-		<link href="resources/css/admin.css" rel="stylesheet" >
+		<link href='<c:url value="/resources/css/admin.css" />' rel="stylesheet" >
 		<!-- Custom CSS & JS -->
 	</head>
 	

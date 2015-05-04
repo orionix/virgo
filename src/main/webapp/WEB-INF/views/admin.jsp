@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ page session="false" %>
 
+<!-- Seems I never use it -->
 <spring:url value="/admin" var="adminUrl"/> 
 
 <html>
@@ -52,7 +53,7 @@
 	</div>	
 		
 	 	<br><br><br>
-	 	<table class="tablesorter" id="news_table"> 
+	 	<table class="display dataTable" id="news_table"> 
 			<thead> 
 				<tr> 
 					<th>id</th> 
@@ -79,63 +80,30 @@
 						<td class="changeMessageOrder" id="messageOrder${news.id}" data-id="${news.id}">${news.messageOrder}</td>
 						<td>
 							<a href="#myModal" class="editNews" role="button" data-toggle="modal" data-id="${news.id}">							
-								<img src="resources/img/edit.png"></img>
+								<img src='<c:url value="/resources/img/edit.png" />' ></img>
 							</a>
 						</td>
 	 	 			</tr>
 	 	 		</c:forEach> 
 			</tbody> 
 		</table>
-		
-		<div id="pager" class="pager">
-		
-			<img src="resources/img/tablesort/first.png" class="first"/>
-			<img src="resources/img/tablesort/prev.png" class="prev"/>
-			<input type="text" class="pagedisplay"/>
-			<img src="resources/img/tablesort/next.png" class="next"/>
-			<img src="resources/img/tablesort/last.png" class="last"/>
-			<select class="pagesize">				
-				<option value="5">5 per page</option>
-				<option selected="selected" value="10">10 per page</option>
-				<option value="20">20 per page</option>					
-			</select>
-		
-		</div>
 
-	 	<script>
-			$(document).ready(function() {
-				$( '#summernote' ).summernote({
-					codemirror: {
-				          theme: 'monokai'
-				    }						
-				});
-				
-				// Сортировка, пегинация и стили таблицы
-		        //$("#pager").unbind();
-				/*
-		        $( '#news_table' )
-		        	.tablesorter( { headers: {6: {sorter: false}}, 
-		        					sortList: [5,0],
-		        				   	widgets: ['zebra']} );
-		        $( '#news_table' ).tablesorterPager({container: $("#pager"), 
-		        									size: 10, 
-		        									offset: 0,
-													page: 0,
-													totalRows: 0,
-													totalPages: 0,
-													container: null,
-													cssNext: '.next',
-													cssPrev: '.prev',
-													cssFirst: '.first',
-													cssLast: '.last',
-													cssPageDisplay: '.pagedisplay',
-													cssPageSize: '.pagesize',
-													seperator: "/",
-													positionFixed: true,
-													appender: this.appender
-												});*/
+ 	<script>
+		$( document ).ready( function() {
+			
+			$( '#summernote' ).summernote({
+				codemirror: {
+			          theme: 'monokai'
+			    }						
 			});
-		</script>
+			
+			$( '#news_table' ).DataTable( {
+				"order": [[ 5, "asc" ]],
+				"lengthMenu": [5, 10, 20]
+			} );
+			
+		});
+	</script>
 
 	<script>		
 		// Увеличение поля для ввода новости при фокусировки и уменьшение при исчезновении фокуса
@@ -153,28 +121,30 @@
 		
 		/* Функция отчистки полей формы */
 		function erase() {
-			$( '#newsForm' ).each(function(){
+			$( '#newsForm' ).each( function(){
                 this.reset();   	//Here form fields will be cleared.
             });
     		
-        	$( 'div#messageStatus button' ).each(function( index ) {
+        	$( 'div#messageStatus button' ).each( function( index ) {
         		$( this ).removeClass( 'active' );      		
 			});
     		
-            $( '.note-editable' ).html('');
-		}		
-		
-	    $(function() {
+            $( '.note-editable' ).html( '' );
+		}
+
+		$(function() {
 	    	
 	    	// Очистка полей формы перед закрытием модального окна
-	    	$( '#closeNews' ).on("click",function(e) {
+	    	$( '#closeNews' ).on( "click", function(e) {
 	    		erase();
 	    		$( '#myModalLabel' ).html( 'Add new post' );
 	    	});
 	    	
-	    	// Делаем кнопку Delete невидимой
-	    	$( '#myModalButton' ).on("click",function(e) {
+	    	// Делаем кнопку Delete невидимой и кнопку Reset видимой
+	    	$( '#myModalButton' ).on( "click", function(e) {
 	    		$( '#deleteNews' ).addClass( 'notShow' );
+	    		// Делаем кнопку Reset невидимой
+		    	$( '#resetNews' ).removeClass( 'notShow' );	
 	    	});
 	    	
 	    	// Post реквест.
@@ -185,7 +155,7 @@
 	        	var title = $( '#messageTitle' ).val();	        	
 	        	var messageStatus;
 	        	
-	        	$( 'div#messageStatus button.active' ).each(function( index ) {
+	        	$( 'div#messageStatus button.active' ).each( function( index ) {
 	        		messageStatus = $( this ).attr( 'data-id' ); 		
 				});
 	        	
@@ -244,21 +214,24 @@
 	    	});
 	        
 	        // Отчистка формы
-	        $( '#resetNews' ).on("click",function(e) {
+	        $( '#resetNews' ).on( "click", function(e) {
 	        	//alert("RESET WORKS!");
 	        	e.preventDefault();
 	        	erase();
 	        });
 	        
 	        // Редактирование новости. Отсылаем id новости на сервер
-	        $( '.editNews' ).click(function(e) {	        	
+	        //$( '.editNews' ).click(function(e) {
+	        $( 'body' ).on( "click", ".editNews", function(e) {
 		       	e.preventDefault();
 		       	
+		       	// Делаем кнопку Delete видимой
 		    	$( '#deleteNews' ).removeClass( 'notShow' );
+		       	
+		    	// Делаем кнопку Reset невидимой
+		    	$( '#resetNews' ).addClass( 'notShow' );
 		        
 		        var dataId = $( this ).attr( 'data-id' );
-		        
-		        //alert( "dataId = " + dataId );
 		        
 		        $.ajax({		        		
 			            
@@ -288,22 +261,15 @@
 		                $( '#myModal' ).modal( 'show' );
 		            },
 		            complete:function() {
-		            	//alert( "dataId = " + dataId );
-		            	/*
-		            	var refreshId = setInterval(function()
-		            	        {
-		            				window.location="admin";
-		            	        }, 10);*/
 		            }
 		       	});
 		        
-		        //$( '#mainContent' ).load( 'admin' );
 		        return false; //for good measure
 		     });
 	        
 	        // Удаление новости
-	        $( '#deleteNews' ).on("click",function(e) {
-	        	if (confirm( "Do you confirm deletion?" )) {
+	        $( '#deleteNews' ).on( "click", function(e) {
+	        	if ( confirm( "Do you confirm deletion?" )) {
 	        		e.preventDefault();
 			        	
 			        var dataId = $( '#newsId' ).text();
@@ -334,52 +300,69 @@
 	           клетка подсвечивается, сигнализируя, что было введено некорректное значение.
 	           Если значение корректно, то оно успешно отсылается на сервер, где обновляет прежнее значение.
 	        */
-	        $( 'td.changeMessageOrder' ).click(function() {
+	        //$( 'td.changeMessageOrder' ).click( function() {
+	        $( 'body' ).on( "click", "td.changeMessageOrder", function() {
 	        	
        	    	var text = $( this ).text();
-       	    	var dataId = $( this ).attr( 'data-id' );
-       	    	var messageOrderId = '#' + $( this ).attr( 'id' );
-       	     	var bkGrndColor = $( this ).css( "background-color" );
-       	     	var fontColor = $( this ).css( "color" );       	     	
-       	     	
-      	    	$( this ).text( '' );
-      	    	
-       	        $( '<input type="text" class="newValueMessageOrder"/>' ).appendTo( $( this ) ).val( text ).select().blur(function() {       	        	
-  	                var newText = $( this ).val();
-  	              	
-  	              	if ( newText !== text ) {
-	  	                if ( /^([1-9]\d*)$/.test(newText) ) {
-		  	                var messageOrder = "messageOrder=" + newText;
-		  	              	//var myJSON = {messageOrder:newText};
-		     	        	//myJSON = JSON.stringify( myJSON );
-		  	              	$.ajax({
-		  		        		//contentType: "application/json",
-		  		        		dataType: "json",
-						    	type: "GET",
-						    	data: messageOrder,				    	
-					            url: "admin/updateMessageOrder/" + dataId,
-					            
-					            success:function( response ) {
-					                console.log( response );
-					            }
-					    	});
-	  	                } else {
-	  	                	newText = text;
-	  	                	
-	  	                	$( messageOrderId ).animate( {
-	  	                		backgroundColor: "#aa0000",
-	  	                		color: "#fff"
-	  	                	}, 500);
-	  	                	
-	  	                	$( messageOrderId ).animate( {
-	  	                		backgroundColor: bkGrndColor,
-	  	                		color: fontColor
-	  	                	}, 500);
-	  	               	}
-  	              	}
-  	                $( this ).parent().text( newText ).find( 'input' ).remove();
-       	    	});      	    	
+       	    	
+       	    	// Проверка на пустое значение во избежание пустого input
+       	    	if ( text !== "" ) {
+       	    	
+	       	    	var dataId = $( this ).attr( 'data-id' );
+	       	    	var messageOrderId = '#' + $( this ).attr( 'id' );
+	       	     	var bkGrndColor = $( this ).css( 'background-color' );
+	       	     	var fontColor = $( this ).css( 'color' );       	     	
+	       	     	
+	      	    	$( this ).text( '' );
+	      	    	
+	       	        $( '<input type="text" class="newValueMessageOrder"/>' ).appendTo( $( this ) ).val( text ).select().blur(function() {
+
+	 	                var newText = $( this ).val();
+	 	              	
+	 	              	if ( newText !== text ) {
+		  	                if ( /^([1-9]\d*)$/.test(newText) ) {
+			  	                var messageOrder = "messageOrder=" + newText;
+			  	              	//var myJSON = {messageOrder:newText};
+			     	        	//myJSON = JSON.stringify( myJSON );
+			  	              	$.ajax({
+			  		        		//contentType: "application/json",
+			  		        		dataType: "json",
+							    	type: "GET",
+							    	data: messageOrder,				    	
+						            url: "admin/updateMessageOrder/" + dataId,
+						            
+						            success:function( response ) {
+						                console.log( response );
+						            }
+						    	});
+		  	                } else {
+		  	                	newText = text;
+		  	                	
+		  	                	// Анимация неправильного значения input
+		  	                	$( messageOrderId ).animate( {
+		  	                		backgroundColor: "#aa0000",
+		  	                		color: "#fff"
+		  	                	}, 500);
+		  	                	
+		  	                	$( messageOrderId ).animate( {
+		  	                		backgroundColor: bkGrndColor,
+		  	                		color: fontColor
+		  	                	}, 500);
+		  	               	}
+	 	            	}
+	 	            
+	      	     		// Удаление input
+	  	            	$( this ).parent().text( newText ).find( 'input' ).remove();	  	            
+	       	    	});       	    
+       	    	}
 	        });
+	        
+	        /*
+	        $( 'td.changeMessageOrder' ).dblclick( function( e ) {
+	        	e.stopPropagation();      //<-------stop the bubbling of the event here
+	        	alert("Double click");
+	        });
+	        */
 	        
 	    });
 	</script>

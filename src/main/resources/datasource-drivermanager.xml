@@ -18,7 +18,7 @@
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url" value="jdbc:mysql://localhost:3306/virgo" />
 		<beans:property name="username" value="root" />
-		<beans:property name="password" value="root" />
+		<beans:property name="password" value="admin" />
 		<!-- Added below properties to deal with connection timeout (to db) when pollService hasnt been used for a long time -->
 		<!-- Max number of connections that can remain idle in pool, without extra conns being released -->
 		<beans:property name="maxIdle">		

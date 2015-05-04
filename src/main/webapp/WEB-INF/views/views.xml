@@ -12,5 +12,9 @@
 		<definition extends="admin_default" name="admin"> 
 			<put-attribute name="body" value="/WEB-INF/views/admin.jsp" /> 
 		</definition>
+		
+		<definition extends="admin_default" name="userslist"> 
+			<put-attribute name="body" value="/WEB-INF/views/userslist.jsp" /> 
+		</definition>
 
 	</tiles-definitions> 

@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -39,7 +37,7 @@ public class News implements Serializable {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId( Integer id ) {
 		this.id = id;
 	}
 
@@ -48,7 +46,7 @@ public class News implements Serializable {
 		return incomingDate;
 	}
 
-	public void setIncomingDate(Date incomingDate) {
+	public void setIncomingDate( Date incomingDate ) {
 		this.incomingDate = incomingDate;
 	}
 
@@ -57,7 +55,7 @@ public class News implements Serializable {
 		return changeDate;
 	}
 
-	public void setChangeDate(Date changeDate) {
+	public void setChangeDate( Date changeDate ) {
 		this.changeDate = changeDate;
 	}
 
@@ -66,7 +64,7 @@ public class News implements Serializable {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle( String title ) {
 		this.title = title;
 	}
 
@@ -75,7 +73,7 @@ public class News implements Serializable {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage( String message ) {
 		this.message = message;
 	}
 
@@ -84,7 +82,7 @@ public class News implements Serializable {
 		return messageStatus;
 	}
 
-	public void setMessageStatus(Integer messageStatus) {
+	public void setMessageStatus( Integer messageStatus ) {
 		this.messageStatus = messageStatus;
 	}
 
@@ -93,19 +91,19 @@ public class News implements Serializable {
 		return messageOrder;
 	}
 
-	public void setMessageOrder(Integer messageOrder) {
+	public void setMessageOrder( Integer messageOrder ) {
 		this.messageOrder = messageOrder;
 	}
  
-	 public String toString() {
-		 return new ToStringBuilder( this )
-	     	.append( "Id",            id )
-	        .append( "incomingDate",  incomingDate )
-	        .append( "changeDate",    changeDate )
-	        .append( "title",         title )
-	        .append( "message",       message )
-	        .append( "messageStatus", messageStatus )
-	        .append( "messageOrder",  messageOrder )
-	        .toString();
+	public String toString() {
+		return new ToStringBuilder( this )
+			.append( "Id",            id )
+			.append( "incomingDate",  incomingDate )
+			.append( "changeDate",    changeDate )
+			.append( "title",         title )
+			.append( "message",       message )
+			.append( "messageStatus", messageStatus )
+			.append( "messageOrder",  messageOrder )
+			.toString();
 	 }
 }
